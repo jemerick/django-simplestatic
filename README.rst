@@ -121,6 +121,11 @@ SIMPLESTATIC_DEBUG: (Defaults to DEBUG)
 SIMPLESTATIC_DEBUG_PATH: (Defaults to 'static/')
     The URL path from which to serve static media during development.
 
+SIMPLESTATIC_SYNC_STATIC_DIR: (Defaults to 'True')
+    If True, this will sync all of the files in your SIMPLESTATIC_DIR to S3. If
+    False, only the compressed static files will be synced. Static files should
+    probably still be synced with 'collectstatic' if False.
+
 SIMPLESTATIC_CUSTOM_DOMAIN: (Defaults to S3 subdomain URL)
     A custom domain from which to serve static media in production. For
     example, you may want to use CloudFront as a CDN in front of your S3

@@ -115,17 +115,18 @@ class Command(NoArgsCommand):
     def handle_noargs(self, **options):
         mimetypes.init()
 
-        locked_print('===> Syncing static directory')
-        pool = ThreadPool(20)
+        if conf.SIMPLESTATIC_SYNC_STATIC_DIR:
+            locked_print('===> Syncing static directory')
+            pool = ThreadPool(20)
 
-        # Sync every file in the static media dir with S3
-        def pooled_sync_file(base, filename):
-            pool.apply_async(self.sync_file, args=[base, filename])
+            # Sync every file in the static media dir with S3
+            def pooled_sync_file(base, filename):
+                pool.apply_async(self.sync_file, args=[base, filename])
 
-        self.walk_tree([conf.SIMPLESTATIC_DIR], pooled_sync_file)
-        pool.close()
-        pool.join()
-        locked_print('===> Static directory syncing complete')
+            self.walk_tree([conf.SIMPLESTATIC_DIR], pooled_sync_file)
+            pool.close()
+            pool.join()
+            locked_print('===> Static directory syncing complete')
 
         locked_print('===> Compressing and uploading CSS and JS')
         pool = ThreadPool(20)

@@ -6,6 +6,8 @@ SIMPLESTATIC_DIR = getattr(settings, 'SIMPLESTATIC_DIR', None)
 if not SIMPLESTATIC_DIR:
     raise ImproperlyConfigured('You must set SIMPLESTATIC_DIR in settings.')
 
+SIMPLESTATIC_SYNC_STATIC_DIR = getattr(settings, 'SIMPLESTATIC_SYNC_STATIC_DIR', True)
+
 SIMPLESTATIC_DEBUG = getattr(settings, 'SIMPLESTATIC_DEBUG',
     settings.DEBUG)
 
